@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+
 //filtro per l'autenticazione (prima esecuzione per il check del token)
 @Component
 @RequiredArgsConstructor
@@ -43,6 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //estraggo l'email dello user dal jwt utilizzando il JwtService
         userEmail = jwtService.extractUsername(jwt);
         //se il risultato è null lo user non è ancora autenticato se lo è non si riprete questo processo
+
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             if(jwtService.isTokenValid(jwt,userDetails)){

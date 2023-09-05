@@ -2,9 +2,11 @@ package com.security.SecurityProj;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableWebMvc
 public class SpaCorsConfig implements WebMvcConfigurer {
 
     // Enable CORS globally
@@ -13,8 +15,9 @@ public class SpaCorsConfig implements WebMvcConfigurer {
 
         registry.addMapping("/api/*")
                 .allowedOrigins("http://localhost:3000")       // http://localhost:3000/
-                .allowedMethods("")       // "GET", "POST", "PUT", "DELETE"
+                .allowedMethods("*")       // "GET", "POST", "PUT", "DELETE"
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
+
 }
